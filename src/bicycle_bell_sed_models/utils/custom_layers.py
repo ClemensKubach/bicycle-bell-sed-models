@@ -2,9 +2,9 @@ from pyclbr import Class
 from prometheus_client import Enum
 import tensorflow as tf
 import tensorflow.keras as keras
-from utils.features import pad_waveform, waveform_to_log_mel_spectrogram_patches
+from bicycle_bell_sed_models.utils.features import pad_waveform, waveform_to_log_mel_spectrogram_patches
 
-from utils.params import Params
+from bicycle_bell_sed_models.utils.params import Params
 
 class YAMNET_OUT(int):
   SCORES: int = 0

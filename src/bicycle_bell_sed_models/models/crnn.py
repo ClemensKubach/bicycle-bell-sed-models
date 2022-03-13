@@ -1,7 +1,7 @@
 import tensorflow as tf
 import tensorflow.keras as keras
-from utils.custom_layers import LogMelSpectrogramTransformLayer, PadWaveformLayer, ReduceTimeWrapper, ReductionOptions
-from utils.params import Params
+from bicycle_bell_sed_models.utils.custom_layers import LogMelSpectrogramTransformLayer, PadWaveformLayer, ReduceTimeWrapper, ReductionOptions
+from bicycle_bell_sed_models.utils.params import Params
 
 def _conv_net(input, params: Params):
   mels = params.mel_bands

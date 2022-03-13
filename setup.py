@@ -18,6 +18,8 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/ClemensKubach/bicycle-bell-sed-models/issues"
     },
     license='MIT',
-    packages=['bicycle-bell-sed-models'],
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src"),
     install_requires=['tensorflow', 'tensorflow_io', 'tensorflow_hub', 'numpy'],
+    python_requires=">=3.6",
 )

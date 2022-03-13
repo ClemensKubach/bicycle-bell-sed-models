@@ -1,7 +1,7 @@
 import tensorflow as tf
 import tensorflow.keras as keras
 import tensorflow_hub as hub
-from utils.custom_layers import YAMNET_OUT, ReduceTimeWrapper, ReductionOptions, YAMNetWrapper
+from bicycle_bell_sed_models.utils.custom_layers import YAMNET_OUT, ReduceTimeWrapper, ReductionOptions, YAMNetWrapper
 
 def _yamnet_pretrained_net(input, yamnetOutputType, yamnet_model_handle='https://tfhub.dev/google/yamnet/1'):
   """ returns embeddings extracted from yamnet """
