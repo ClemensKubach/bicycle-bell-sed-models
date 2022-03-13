@@ -19,7 +19,7 @@ setuptools.setup(
     },
     license='MIT',
     package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    packages=setuptools.find_packages(where="src", exclude=['visualizations']),
     install_requires=['tensorflow', 'tensorflow_io', 'tensorflow_hub', 'numpy'],
     python_requires=">=3.6",
 )
