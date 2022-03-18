@@ -37,7 +37,7 @@ def yamnet_lstm_fc():
     - log_mel_spectrogram has shape [<# STFT frames>, params.mel_bands] 
   """
   params = Params()
-  wave = keras.layers.Input(shape=(None,), batch_size=None, dtype=tf.float32, name='wav_16000_mono_input')
+  wave = keras.layers.Input(shape=(None,), batch_size=None, dtype=tf.float32, name=f'wav_{int(params.sample_rate)}_mono_input')
   embeddings, log_mel_spectrogram = _yamnet_pretrained_net(wave, params, yamnetOutputType=[YAMNET_OUT.EMBEDDINGS, YAMNET_OUT.SPECTROGRAM])
   embeddings = keras.layers.Layer(name='yamnet_embeddings')(embeddings)
   lstm_out = _lstm_net(embeddings, params)

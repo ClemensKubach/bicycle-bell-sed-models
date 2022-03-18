@@ -2,6 +2,7 @@ import tensorflow as tf
 import tensorflow.keras as keras
 import tensorflow_hub as hub
 from bicycle_bell_sed_models.utils.custom_layers import YAMNET_OUT, ClassOutput, LogMelSpectrogramOutput, ReduceTimeWrapper, ReductionOptions, YAMNetWrapper
+from bicycle_bell_sed_models.utils.params_yamnet import Params
 
 def _yamnet_pretrained_net(input, yamnetOutputType, yamnet_model_handle='https://tfhub.dev/google/yamnet/1'):
   """ returns embeddings extracted from yamnet """
@@ -27,7 +28,8 @@ def yamnet_base():
     - wave_classification is a scalar
     - log_mel_spectrogram has shape [<# STFT frames>, params.mel_bands] 
   """
-  wave = keras.layers.Input(shape=(None,), batch_size=None, dtype=tf.float32, name='wav_16000_mono_input')
+  params = Params()
+  wave = keras.layers.Input(shape=(None,), batch_size=None, dtype=tf.float32, name=f'wav_{int(params.sample_rate)}_mono_input')
   scores, log_mel_spectrogram = _yamnet_pretrained_net(wave, yamnetOutputType=[YAMNET_OUT.SCORES, YAMNET_OUT.SPECTROGRAM])
   scores = keras.layers.Layer(name='scores')(scores)
   wave_classification = _dissolve_time(scores)
