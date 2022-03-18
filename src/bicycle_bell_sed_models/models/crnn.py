@@ -11,9 +11,9 @@ def _conv_net(input, params: Params):
     pool_size = mels - kernel_size + 1
     convNet = keras.layers.TimeDistributed(
         keras.layers.Conv1D(filters=filters, kernel_size=kernel_size, activation='relu', name='conv1d'), name='time_distributed_convnet_2')(input)
-    convNet = keras.layers.TimeDistributed(keras.layers.BatchNormalization(name='batch_normalized_1'), name='time_distributed_convnet_3')(convNet)
+    #convNet = keras.layers.TimeDistributed(keras.layers.BatchNormalization(name='batch_normalized_1'), name='time_distributed_convnet_3')(convNet)
     convNet = keras.layers.TimeDistributed(keras.layers.MaxPooling1D(pool_size=pool_size, name='max_pooling_1d'), name='time_distributed_convnet_4')(convNet)
-    convNet = keras.layers.TimeDistributed(keras.layers.Dropout(0.1, name='dropout_1'), name='time_distributed_convnet_5')(convNet)
+    #convNet = keras.layers.TimeDistributed(keras.layers.Dropout(0.1, name='dropout_1'), name='time_distributed_convnet_5')(convNet)
     convNet = keras.layers.TimeDistributed(keras.layers.Flatten(name='flatten_1'), name='time_distributed_convnet_6')(convNet)
     return convNet
 
@@ -33,7 +33,7 @@ def _lstm_net(input, params: Params):
 def _fully_connected_net(input, params: Params):
     mels = params.mel_bands
     fcNet = keras.layers.TimeDistributed(keras.layers.Dense(units=mels, activation='relu', name='dense_1'), name='time_distributed_fcnet_1')(input)
-    fcNet = keras.layers.TimeDistributed(keras.layers.BatchNormalization(name='batch_normalized_2'), name='time_distributed_fcnet_2')(fcNet)
+    #fcNet = keras.layers.TimeDistributed(keras.layers.BatchNormalization(name='batch_normalized_2'), name='time_distributed_fcnet_2')(fcNet)
     fcNet = keras.layers.TimeDistributed(keras.layers.Dense(1, activation='sigmoid', name='dense_frame_output'), name='time_distributed_fcnet_3')(fcNet)
     fcNet = keras.layers.Flatten(name='flatten_2')(fcNet)
     return fcNet
