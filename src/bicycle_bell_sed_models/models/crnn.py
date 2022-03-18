@@ -33,7 +33,7 @@ def _lstm_net(input, params: Params):
 def _fully_connected_net(input, params: Params):
     mels = params.mel_bands
     fcNet = keras.layers.TimeDistributed(keras.layers.Dense(units=mels, activation='relu', name='dense_1'), name='time_distributed_fcnet_1')(input)
-    fcNet = keras.layers.TimeDistributed(keras.layers.BatchNormalization(name='flatten_1'), name='time_distributed_fcnet_2')(fcNet)
+    fcNet = keras.layers.TimeDistributed(keras.layers.BatchNormalization(name='batch_normalized_2'), name='time_distributed_fcnet_2')(fcNet)
     fcNet = keras.layers.TimeDistributed(keras.layers.Dense(1, activation='sigmoid', name='dense_frame_output'), name='time_distributed_fcnet_3')(fcNet)
     fcNet = keras.layers.Flatten(name='flatten_2')(fcNet)
     return fcNet
