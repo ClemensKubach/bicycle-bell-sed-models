@@ -71,13 +71,14 @@ def crnn() -> keras.Model:
     params = Params()
     # wave is gegen als 44100 Hz mono normed float vor
     wave = keras.layers.Input(shape=(None,), batch_size=None, dtype=tf.float32, name=f'wav_{int(params.sample_rate)}_mono_input')
-    wave_padded = PadWaveformLayer(params)(wave)
-    log_mel_spectrogram, features = LogMelSpectrogramTransformLayer(params)(wave_padded)
+    #wave_padded = PadWaveformLayer(params)(wave)
+    log_mel_spectrogram, features = LogMelSpectrogramTransformLayer(params)(wave) #(wave_padded)
     # log_mel_spectrogram has shape [<# STFT frames>, params.mel_bands]
     # features has shape [<# patches>, <# STFT frames in an patch>, params.mel_bands]
     wave_classification = _crnn_core(log_mel_spectrogram, params)
 
     class_output = ClassOutput()(wave_classification)
     log_mel_spectrogram_output = LogMelSpectrogramOutput()(log_mel_spectrogram)
-    model = keras.Model(name='crnn', inputs=wave, outputs=[class_output, log_mel_spectrogram_output])
+    #model = keras.Model(name='crnn', inputs=wave, outputs=[class_output, log_mel_spectrogram_output])
+    model = keras.Model(name='crnn', inputs=wave, outputs=class_output)
     return model

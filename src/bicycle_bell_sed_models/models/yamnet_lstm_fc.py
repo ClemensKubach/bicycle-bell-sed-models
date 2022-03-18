@@ -15,7 +15,7 @@ def _lstm_net(input, params: Params):
 
 def _fully_connected_net(input, params: Params):
   fc = keras.layers.TimeDistributed( keras.layers.Dense(512, activation='relu', name='dense_1'), name='time_distributed_1' )(input)
-  fc = keras.layers.TimeDistributed( keras.layers.Dense(params.num_classes , name='dense_2'), name='time_distributed_2' )(fc) # softmax could be wrong - delete activation param
+  fc = keras.layers.TimeDistributed( keras.layers.Dense(params.num_classes , name='dense_2', activation='sigmoid'), name='time_distributed_2' )(fc) # softmax could be wrong - delete activation param
   return fc
 
 def _dissolve_time(input, params: Params):
@@ -46,5 +46,6 @@ def yamnet_lstm_fc():
 
   class_output = ClassOutput()(wave_classification)
   log_mel_spectrogram_output = LogMelSpectrogramOutput()(log_mel_spectrogram)
-  model = keras.Model(name='yamnet_lstm_fc', inputs=wave, outputs=[class_output, log_mel_spectrogram_output])
+  #model = keras.Model(name='yamnet_lstm_fc', inputs=wave, outputs=[class_output, log_mel_spectrogram_output])
+  model = keras.Model(name='yamnet_lstm_fc', inputs=wave, outputs=class_output)
   return model

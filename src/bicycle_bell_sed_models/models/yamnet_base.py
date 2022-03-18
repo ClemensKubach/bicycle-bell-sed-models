@@ -36,5 +36,6 @@ def yamnet_base():
 
   class_output = ClassOutput()(wave_classification)
   log_mel_spectrogram_output = LogMelSpectrogramOutput()(log_mel_spectrogram)
-  model = keras.Model(name='yamnet_base', inputs=wave, outputs=[class_output, log_mel_spectrogram_output])
+  #model = keras.Model(name='yamnet_base', inputs=wave, outputs=[class_output, log_mel_spectrogram_output])
+  model = keras.Model(name='yamnet_base', inputs=wave, outputs=class_output)
   return model
