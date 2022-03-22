@@ -14,8 +14,8 @@ def _lstm_net(input, params: Params):
   return lstm
 
 def _fully_connected_net(input, params: Params):
-  fc = keras.layers.TimeDistributed( keras.layers.Dense(512, activation='relu', name='dense_1'), name='time_distributed_1' )(input)
-  fc = keras.layers.TimeDistributed( keras.layers.Dense(params.num_classes , name='dense_2', activation='sigmoid'), name='time_distributed_2' )(fc) # softmax could be wrong - delete activation param
+  fc = keras.layers.TimeDistributed( keras.layers.Dense(512, activation='relu', name='dense_1'), name='time_distributed_dense_1' )(input)
+  fc = keras.layers.TimeDistributed( keras.layers.Dense(params.num_classes , name='dense_frame_output', activation=params.classifier_activation), name='time_distributed_dense_frame_output' )(fc)
   return fc
 
 def _dissolve_time(input, params: Params):
@@ -32,6 +32,9 @@ def yamnet_lstm_fc():
   - Waveform 16000 Hz mono channel audio with shape (None,)
 
   Model Output:
+  - wave_classification is a scalar
+
+  inactive multi-output version: 
   - tuple of (wave_classification, log_mel_spectrogram)
     - wave_classification is a scalar
     - log_mel_spectrogram has shape [<# STFT frames>, params.mel_bands] 

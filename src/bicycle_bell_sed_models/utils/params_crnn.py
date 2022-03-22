@@ -28,10 +28,10 @@ from dataclasses import dataclass
 # clip and possibly better performance at a larger computational cost.
 @dataclass(frozen=True)  # Instances of this class are immutable.
 class Params:
-  sample_rate: float = 16000.0 # 44100.0 # 
+  sample_rate: float = 16000.0 # 44100.0
   stft_window_seconds: float = 0.025
   stft_hop_seconds: float = 0.010
-  mel_bands: int = 64 #128 # 
+  mel_bands: int = 64 #128
   mel_min_hz: float = 125.0 # okay because bicycle bells are defined as higher frequencies
   mel_max_hz: float = 7500.0 #20000.0 # upper limit for the human hearing, 7500.0 loses to many details
   log_offset: float = 0.001

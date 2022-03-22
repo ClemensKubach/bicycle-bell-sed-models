@@ -24,6 +24,9 @@ def yamnet_base():
   - Waveform 16000 Hz mono channel audio with shape (None,)
 
   Model Output:
+  - wave_classification is a scalar
+
+  inactive multi-output version: 
   - tuple of (wave_classification, log_mel_spectrogram)
     - wave_classification is a scalar
     - log_mel_spectrogram has shape [<# STFT frames>, params.mel_bands] 
