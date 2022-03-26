@@ -10,15 +10,14 @@ def _yamnet_pretrained_net(input, params: Params, yamnetOutputType, yamnet_model
   return yamnet_wrapper_dict['embeddings'], yamnet_wrapper_dict['spectrogram']
 
 def _lstm_net(input, params: Params):
-  lstm = keras.layers.LSTM(256, return_sequences=True, dropout=0.3, name='lstm')(input)
+  lstm = keras.layers.LSTM(64, return_sequences=True, dropout=0.3, name='lstm')(input)
   return lstm
 
 def _fully_connected_net(input, params: Params):
-  fc = keras.layers.TimeDistributed( keras.layers.Dense(128, activation='relu', name='dense_1'), name='time_distributed_dense_1' )(input)
+  fc = keras.layers.TimeDistributed( keras.layers.Dense(32, activation='relu', name='dense_1'), name='time_distributed_dense_1' )(input)
   fc = keras.layers.TimeDistributed( keras.layers.Dropout(0.3, name='dropout_1'), name='time_distributed_dropout_1' )(fc)
-  fc = keras.layers.TimeDistributed( keras.layers.Dense(64, activation='relu', name='dense_2'), name='time_distributed_dense_2' )(input)
+  fc = keras.layers.TimeDistributed( keras.layers.Dense(16, activation='relu', name='dense_2'), name='time_distributed_dense_2' )(fc)
   fc = keras.layers.TimeDistributed( keras.layers.Dropout(0.3, name='dropout_2'), name='time_distributed_dropout_2' )(fc)
-  fc = keras.layers.TimeDistributed( keras.layers.Dense(32, activation='relu', name='dense_3'), name='time_distributed_dense_3' )(input)
   fc = keras.layers.TimeDistributed( keras.layers.Dense(params.num_classes , name='dense_frame_output', activation=params.classifier_activation), name='time_distributed_dense_frame_output' )(fc)
   return fc
 
