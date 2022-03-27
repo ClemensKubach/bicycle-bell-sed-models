@@ -32,6 +32,14 @@ class ReduceMeanLayer(keras.layers.Layer):
   def call(self, input):
     return tf.math.reduce_mean(input, axis=self.axis)
 
+class ReduceMaxLayer(keras.layers.Layer):
+  def __init__(self, axis=0, name='reduce_max', **kwargs):
+    super(ReduceMaxLayer, self).__init__(name=name, **kwargs)
+    self.axis = axis
+
+  def call(self, input):
+    return tf.math.reduce_max(input, axis=self.axis)
+
 class ArgMaxLayer(keras.layers.Layer):
   def __init__(self, axis=0, name='arg_max', **kwargs):
     super(ArgMaxLayer, self).__init__(name=name, **kwargs)
@@ -42,6 +50,7 @@ class ArgMaxLayer(keras.layers.Layer):
 
 class ReductionOptions(Enum):
   REDUCE_MEAN = ReduceMeanLayer
+  REDUCE_MAX = ReduceMaxLayer
   LSTM_CELL = keras.layers.LSTM
   AVERAGE_POOLING_1D = keras.layers.GlobalAveragePooling1D
   ARGMAX = ArgMaxLayer
@@ -52,6 +61,9 @@ class ReduceTimeWrapper(keras.layers.Wrapper):
     self.mode = mode
     if mode == ReductionOptions.REDUCE_MEAN:
       layer = ReduceMeanLayer(axis=layer_axis, name='reduce_mean_output')
+
+    elif mode == ReductionOptions.REDUCE_MAX:
+      layer = ReduceMaxLayer(axis=layer_axis, name='reduce_max_output')
 
     elif mode == ReductionOptions.LSTM_CELL:
       layer = keras.layers.LSTM(num_classes, return_sequences=False, recurrent_activation='softmax', name='lstm_output')

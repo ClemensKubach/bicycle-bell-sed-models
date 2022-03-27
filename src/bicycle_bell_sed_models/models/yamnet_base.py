@@ -11,7 +11,7 @@ def _yamnet_pretrained_net(input, yamnetOutputType, yamnet_model_handle='https:/
   return yamnet_wrapper_dict['scores'][:, :, BICYCLE_BELL_CLASS_INDEX], yamnet_wrapper_dict['spectrogram']
 
 def _dissolve_time(input):
-  single_out = ReduceTimeWrapper(ReductionOptions.ARGMAX)(input)
+  single_out = ReduceTimeWrapper(ReductionOptions.REDUCE_MAX)(input)
   return single_out
 
 
