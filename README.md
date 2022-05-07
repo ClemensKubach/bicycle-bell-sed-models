@@ -1,29 +1,30 @@
-# bicycle-bell-sed-models
-
+# Bicycle Bell Sound Event Detection Models
 **Author: Clemens Kubach**
 
+This repository is one of three for my bachelor thesis on "Development of an Embedded System 
+for Detecting Acoustic Alert Signals of Cyclists Using Neural Networks".
 
-## Description
-This is a collection of the models for my bachelor thesis about atomatically detecting the sound event of cyclists using their bicycle bell.
+It contains the architectures of the used neural networks to detect the sound event of cyclists using their bicycle bell. Written in Python 3.9.
 
-Written in Python 3.9.7.
+The other related repositories are:
+- [bicycle-bell-sed-pipeline](https://github.com/ClemensKubach/bicycle-bell-sed-pipeline)
+- [bicycle-bell-sed-software](https://github.com/ClemensKubach/bicycle-bell-sed-software)
 
 
 ## Usage
 You can use this package with:
 ```
-pip3 install git+https://github.com/ClemensKubach/bicycle-bell-sed-models.git
-OR
-pip3 install git+https://{gh_token}@github.com/ClemensKubach/bicycle-bell-sed-models.git
+pip install git+https://github.com/ClemensKubach/bicycle-bell-sed-models.git
 ```
-where `{gh_token}` is your personal access token to your github account with the rights to clone private repositories. You must have granted permissions to access this repository from github.
 
+If this repository is private, use `pip install git+https://{gh_token}@github.com/ClemensKubach/bicycle-bell-sed-models.git`
+where `{gh_token}` is your personal access token to your github account with the rights to clone private repositories. You must have granted permissions to access this repository from GitHub.
 
 ## Models
 There are 3 model configurations...
 
 ### CRNN
-A model based on an CRNN architecture without any pre-training. Inspired by [[1]](#1).
+A model based on a CRNN architecture without any pre-training. Inspired by [[1]](#1).
 
 ![CRNN](src/visualizations/crnn.png)
 
